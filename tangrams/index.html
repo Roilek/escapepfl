@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 10px;
+            background: #f0f0f0;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            height: 100px;
+        }
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .image-item {
+            margin: 15px;
+            text-align: center;
+        }
+        .image-item img {
+            width: 200px;
+            height: 200px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
+        }
+        .image-item button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            color: white;
+            background: #007BFF;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @media only screen and (max-width: 600px) {
+            .image-item img {
+                width: 100px;
+                height: 100px;
+            }
+            .image-item button {
+                padding: 5px 10px;
+            }
+        }
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
+            gap: 30px;
+        }
+        .center form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .center form button {
+            background-color: #007BFF; /* Blue color */
+            color: white; /* White text */
+            font-size: 20px; /* Bigger font size */
+            padding: 15px 30px; /* Bigger button size */
+            border: none; /* Remove the default button border */
+            border-radius: 5px; /* Round the corners */
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<img src="../images/logo.png" class="logo" alt="logo">
+
+<h1>Résolvez nos tangrams !</h1>
+
+<div class="center">
+    <form method="get" action="resources/Tangrams.pdf">
+        <button type="submit">Solution des tangrams</button>
+    </form>
+    <form method="get" action="resources/Casse_tête.pdf">
+        <button type="submit">Solution des casse-têtes</button>
+    </form>
+</div>
+
+<div class="image-container" id="imageContainer">
+    <!-- Les images vont ici -->
+</div>
+
+<script>
+    var container = document.getElementById('imageContainer');
+    for (var i = 1; i <= 38; i++) {
+        (function(i) {  // New scope for each iteration
+            var item = document.createElement('div');
+            item.className = 'image-item';
+
+            var img = document.createElement('img');
+            img.src = 'images/Tangram' + i + '.png';
+            img.id = 'tangram' + i;
+            img.alt = 'tamgram' + i;
+
+            var br = document.createElement('br');
+
+            var button = document.createElement('button');
+            button.textContent = 'Solution';
+            button.onclick = function() { solvePuzzle(img.id, 'images/Tangram' + i + 's.png'); };
+
+            item.appendChild(img);
+            item.appendChild(br);
+            item.appendChild(button);
+
+            container.appendChild(item);
+        })(i);  // Immediately invoke the function with `i` as argument
+    }
+</script>
+
+
+<script>
+    function solvePuzzle(puzzleId, solutionImage) {
+        document.getElementById(puzzleId).src = solutionImage;
+    }
+</script>
+
+</body>
+</html>
